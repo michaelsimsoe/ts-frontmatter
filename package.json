@@ -1,0 +1,39 @@
+{
+  "name": "ts-frontmatter",
+  "version": "1.0.0",
+  "description": "A TypeScript library to parse front matter from Markdown files.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/michaelsimsoe/ts-frontmatter.git"
+  },
+  "keywords": [
+    "typescript",
+    "markdown",
+    "frontmatter",
+    "parser",
+    "yaml",
+    "metadata"
+  ],
+  "author": "Your Name <you@example.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^22.1.0",
+    "fs-extra": "^11.2.0",
+    "js-yaml": "^4.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/jest": "^29.5.12",
+    "@types/js-yaml": "^4.0.9",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.4"
+  }
+}
