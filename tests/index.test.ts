@@ -1,7 +1,7 @@
 import { extractor, test, FrontMatterResult } from '../src';
 
 const exampleMarkdown = `---
-title: "Hello World"
+title: "Hello Blog"
 date: "2024-08-05"
 updated: "2024-08-06"
 tags:
@@ -16,7 +16,7 @@ describe('extractor function', () => {
 
     console.log('Extracted Result:', result);
 
-    expect(result.attributes.title).toBe("Hello World");
+    expect(result.attributes.title).toBe("Hello Blog");
     expect(result.attributes.date).toBe("2024-08-05");
     expect(result.body.trim()).toBe("This is my first blog post written in Markdown.");
     expect(result.bodyBegin).toBe(8); // Line number where the body begins
