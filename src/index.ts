@@ -23,10 +23,16 @@ const pattern = '^(' +
     '(?:\\n)?)';
 const regex = new RegExp(pattern, 'm');
 
-function extractor(string: string, options?: { allowUnsafe?: boolean }): FrontMatterResult {
+/**
+ * Extracts front matter and body content from a string.
+ * @param string - The input string containing front matter and body content.
+ * @param options - Optional settings for the extraction process.
+ * @returns An object containing the parsed front matter attributes, body content, and other metadata.
+ */
+function extractor(string: string, options: { allowUnsafe?: boolean } = { allowUnsafe: false }): FrontMatterResult {
     string = string || '';
     const defaultOptions = { allowUnsafe: false };
-    options = options instanceof Object ? { ...defaultOptions, ...options } : defaultOptions;
+    options = { ...defaultOptions, ...options };
 
     const lines = string.split(/(\r?\n)/);
     if (lines[0] && /(= yaml =|---)/.test(lines[0])) {
@@ -40,6 +46,12 @@ function extractor(string: string, options?: { allowUnsafe?: boolean }): FrontMa
     }
 }
 
+/**
+ * Computes the line number where the body content begins.
+ * @param match - The regex match object.
+ * @param body - The full content body string.
+ * @returns The line number where the body content begins.
+ */
 function computeLocation(match: RegExpExecArray, body: string): number {
     let line = 1;
     let pos = body.indexOf('\n');
@@ -56,6 +68,11 @@ function computeLocation(match: RegExpExecArray, body: string): number {
     return line;
 }
 
+/**
+ * Parses the string to extract front matter and body content.
+ * @param string - The input string containing front matter and body content.
+ * @returns An object containing the parsed front matter attributes, body content, and other metadata.
+ */
 function parse(string: string): FrontMatterResult {
     const match = regex.exec(string);
     if (!match) {
@@ -71,10 +88,6 @@ function parse(string: string): FrontMatterResult {
     const body = string.replace(match[0], '');
     const line = computeLocation(match, string);
 
-    console.log('YAML Content:', yamlContent);
-    console.log('Parsed Attributes:', attributes);
-    console.log('Body:', JSON.stringify(body));
-
     return {
         attributes: attributes,
         body: body,
@@ -83,6 +96,11 @@ function parse(string: string): FrontMatterResult {
     };
 }
 
+/**
+ * Tests if the given string contains front matter.
+ * @param string - The input string to test.
+ * @returns True if the string contains front matter, otherwise false.
+ */
 function test(string: string): boolean {
     string = string || '';
     return regex.test(string);
