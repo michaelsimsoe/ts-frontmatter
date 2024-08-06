@@ -2,7 +2,8 @@ import { extractor, test, FrontMatterResult } from '../src';
 
 const exampleMarkdown = `---
 title: "Hello World"
-date: "2024-08-06"
+date: "2024-08-05"
+updated: "2024-08-06"
 tags:
   - javascript
 ---
@@ -16,9 +17,9 @@ describe('extractor function', () => {
     console.log('Extracted Result:', result);
 
     expect(result.attributes.title).toBe("Hello World");
-    expect(result.attributes.date).toBe("2024-08-06");
+    expect(result.attributes.date).toBe("2024-08-05");
     expect(result.body.trim()).toBe("This is my first blog post written in Markdown.");
-    expect(result.bodyBegin).toBe(7); // Line number where the body begins
+    expect(result.bodyBegin).toBe(8); // Line number where the body begins
   });
 
   it('should return empty attributes and entire body if no front matter', () => {
